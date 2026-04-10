@@ -70,9 +70,13 @@ const Dashboard = () => {
                 <Bell className="h-4 w-4 text-gray-600" />
                 <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />
               </button>
-              <div className="h-8 w-8 rounded-full bg-[#18AE59]/10 flex items-center justify-center">
-                <User className="h-4 w-4 text-[#18AE59]" />
-              </div>
+              <button
+                onClick={() => navigate('/profile')}
+                className="h-8 w-8 rounded-full bg-gradient-to-br from-[#18AE59] to-[#0d3320] flex items-center justify-center text-white text-xs font-bold hover:shadow-lg hover:shadow-[#18AE59]/20 transition-all"
+                title="My Profile"
+              >
+                DA
+              </button>
               <button
                 onClick={() => navigate('/login')}
                 className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
