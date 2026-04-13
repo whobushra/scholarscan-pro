@@ -37,13 +37,13 @@ const Login = () => {
     <div className="min-h-dvh flex flex-col bg-[#f8f7f4] relative">
       <Link
         to="/"
-        className="absolute top-4 right-4 sm:top-5 sm:right-6 lg:top-6 lg:right-10 z-20"
+        className="absolute top-4 left-4 sm:top-5 sm:left-6 lg:top-6 lg:left-10 z-20"
         aria-label="Reliance Foundation Scholarships home"
       >
         <img src={rfsLogo} alt="" className="h-9 sm:h-10 lg:h-11 object-contain drop-shadow-sm" />
       </Link>
 
-      <div className="flex-1 flex flex-row min-h-0">
+      <div className="flex-1 flex flex-row-reverse min-h-0">
         {/* Left: Login Form */}
         <div className="w-full lg:w-[420px] xl:w-[460px] shrink-0 flex flex-col justify-center px-6 sm:px-10 lg:px-12 pt-14 pb-4 lg:py-6 bg-[#f8f7f4] min-h-0">
           <div className="mb-5 shrink-0">
@@ -153,7 +153,7 @@ const Login = () => {
               }}
             />
           ))}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0d3320]/70 via-[#0d3320]/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-l from-[#0d3320]/70 via-[#0d3320]/30 to-transparent" />
           <div className="absolute bottom-12 left-12 right-12 z-10">
             <h2 className="text-3xl font-bold text-[#f8f7f4] leading-tight">
               Empowering the next generation<br />through education
@@ -178,8 +178,8 @@ const Login = () => {
         </div>
       </div>
 
-      <p className="pointer-events-none absolute bottom-4 right-4 sm:bottom-5 sm:right-5 lg:bottom-6 lg:right-10 z-20 max-w-[calc(100vw-2rem)] text-right text-[10px] sm:text-[11px] leading-snug text-[#0d3320]/60 lg:text-[#f8f7f4]/75">
-        <span className="pointer-events-auto inline-block text-right">
+      <p className="pointer-events-none absolute bottom-4 left-4 sm:bottom-5 sm:left-5 lg:bottom-6 lg:left-10 z-20 max-w-[calc(100vw-2rem)] text-left text-[10px] sm:text-[11px] leading-snug text-[#0d3320]/60 lg:text-[#f8f7f4]/75">
+        <span className="pointer-events-auto inline-block text-left">
           All rights reserved. Terms & Conditions. Contact us:{' '}
           <a
             href="mailto:rf.scholarships@reliancefoundation.org"
