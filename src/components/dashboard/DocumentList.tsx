@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Search, SlidersHorizontal, ArrowUpDown } from 'lucide-react';
+import { Search, ArrowUpDown } from 'lucide-react';
 import { Document, RiskLevel, DocStatus } from '@/data/mockDocuments';
 import { cn } from '@/lib/utils';
 
@@ -25,20 +25,17 @@ const riskConfig: Record<RiskLevel, { label: string; dot: string; bg: string }> 
 };
 
 type StatusFilter = 'all' | DocStatus;
-type RiskFilter = 'all' | RiskLevel;
 type SortBy = 'risk' | 'updated';
 
 const DocumentList = ({ documents, selectedId, onSelect, selectedIds, onToggleSelect }: Props) => {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all');
-  const [riskFilter, setRiskFilter] = useState<RiskFilter>('all');
   const [sortBy, setSortBy] = useState<SortBy>('risk');
 
   const filtered = useMemo(() => {
     let result = documents.filter((d) => {
       if (search && !d.name.toLowerCase().includes(search.toLowerCase())) return false;
       if (statusFilter !== 'all' && d.status !== statusFilter) return false;
-      if (riskFilter !== 'all' && d.riskLevel !== riskFilter) return false;
       return true;
     });
     result.sort((a, b) => {
@@ -46,21 +43,13 @@ const DocumentList = ({ documents, selectedId, onSelect, selectedIds, onToggleSe
       return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
     });
     return result;
-  }, [documents, search, statusFilter, riskFilter, sortBy]);
+  }, [documents, search, statusFilter, sortBy]);
 
   const statusFilters: { key: StatusFilter; label: string }[] = [
     { key: 'all', label: 'All' },
     { key: 'pending', label: 'Pending' },
     { key: 'approved', label: 'Approved' },
     { key: 'rejected', label: 'Rejected' },
-  ];
-
-  const riskFilters: { key: RiskFilter; label: string; dot: string }[] = [
-    { key: 'all', label: 'All Risk', dot: '' },
-    { key: 'low', label: 'Low', dot: 'bg-risk-low' },
-    { key: 'medium', label: 'Med', dot: 'bg-risk-medium' },
-    { key: 'high', label: 'High', dot: 'bg-risk-high' },
-    { key: 'critical', label: 'Crit', dot: 'bg-risk-critical' },
   ];
 
   return (
@@ -97,25 +86,6 @@ const DocumentList = ({ documents, selectedId, onSelect, selectedIds, onToggleSe
                   : 'bg-secondary text-muted-foreground hover:text-foreground'
               )}
             >
-              {f.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Risk Filters */}
-        <div className="flex gap-1 flex-wrap">
-          {riskFilters.map((f) => (
-            <button
-              key={f.key}
-              onClick={() => setRiskFilter(f.key)}
-              className={cn(
-                'px-2 py-1 text-[11px] font-medium rounded-md transition-colors flex items-center gap-1',
-                riskFilter === f.key
-                  ? 'bg-primary text-primary-foreground'
-                  : 'bg-secondary text-muted-foreground hover:text-foreground'
-              )}
-            >
-              {f.dot && <span className={cn('w-1.5 h-1.5 rounded-full', f.dot)} />}
               {f.label}
             </button>
           ))}

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Mail, Phone, Building, Briefcase, User, KeyRound, ChevronRight } from 'lucide-react';
 import rfsLogo from '@/assets/rfs-logo.png';
-import banner01 from '@/assets/banner01.png';
+import heroBanner from '@/assets/banner.png';
 
 const profileData = {
   name: 'Demo AVR1',
@@ -48,14 +48,16 @@ const Profile = () => {
         </div>
       </header>
 
-      {/* Hero Banner */}
-      <div className="relative h-36 sm:h-44 overflow-hidden">
-        <img src={banner01} alt="" className="w-full h-full object-cover" />
+      {/* Hero Banner — aligned with Dashboard (centered copy clears -mt-8 overlap below) */}
+      <div className="relative h-36 sm:h-44 overflow-hidden text-white">
+        <img src={heroBanner} alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0d3320]/90 to-[#18AE59]/70" />
-        <div className="absolute inset-0 flex items-end">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-5 sm:pb-6">
-            <p className="text-xs text-white/60 font-medium tracking-wide uppercase">Reliance Foundation Scholarships</p>
-            <h2 className="text-xl sm:text-2xl font-bold text-white mt-1">My Profile</h2>
+        <div className="absolute inset-0 z-20 flex items-center pointer-events-none">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <p className="text-xs text-white/70 font-medium tracking-wide uppercase drop-shadow-sm">
+              Reliance Foundation Scholarships
+            </p>
+            <h2 className="text-xl sm:text-2xl font-bold drop-shadow-sm mt-1">My Profile</h2>
           </div>
         </div>
       </div>

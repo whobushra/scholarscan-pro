@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Building2, FileCheck, Wallet, Search, ChevronRight, AlertTriangle, CheckCircle2, XCircle, Clock, ArrowUpDown, Filter, Bell, User, LogOut } from 'lucide-react';
+import { Building2, FileCheck, Wallet, Search, ChevronRight, AlertTriangle, CheckCircle2, XCircle, Clock, Bell, LogOut } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import rfsLogo from '@/assets/rfs-logo.png';
+import heroBanner from '@/assets/banner.png';
 import { applicants, Applicant } from '@/data/mockApplicants';
 
 type Step = 'bank' | 'application' | 'disbursement';
@@ -27,23 +28,30 @@ const riskDot: Record<string, string> = {
   critical: 'bg-red-500',
 };
 
+type RiskFilter = 'all' | Applicant['riskLevel'];
+
+const riskFilterOptions: { key: RiskFilter; label: string }[] = [
+  { key: 'all', label: 'All' },
+  { key: 'low', label: 'Low' },
+  { key: 'medium', label: 'Medium' },
+  { key: 'high', label: 'High' },
+  { key: 'critical', label: 'Critical' },
+];
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState<Step>('application');
   const [search, setSearch] = useState('');
-  const [sortBy, setSortBy] = useState<'risk' | 'name' | 'date'>('risk');
+  const [riskFilter, setRiskFilter] = useState<RiskFilter>('all');
 
   const filtered = applicants
     .filter((a) => {
+      if (riskFilter !== 'all' && a.riskLevel !== riskFilter) return false;
       if (!search) return true;
       const q = search.toLowerCase();
       return a.name.toLowerCase().includes(q) || a.applicationNo.toLowerCase().includes(q);
     })
-    .sort((a, b) => {
-      if (sortBy === 'risk') return b.riskScore - a.riskScore;
-      if (sortBy === 'name') return a.name.localeCompare(b.name);
-      return new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime();
-    });
+    .sort((a, b) => b.riskScore - a.riskScore);
 
   const pendingCount = applicants.filter((a) => a.status === 'pending').length;
 
@@ -90,15 +98,21 @@ const Dashboard = () => {
       </header>
 
       {/* Hero Banner */}
-      <div className="bg-gradient-to-r from-[#0d3320] to-[#18AE59] text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-          <h2 className="text-lg sm:text-xl font-bold">My Tasks</h2>
-          <p className="text-sm text-white/70 mt-1">Manage verifications and review scholarship applications</p>
+      <div className="relative h-36 sm:h-44 overflow-hidden text-white">
+        <img src={heroBanner} alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0d3320]/90 to-[#18AE59]/70" />
+        <div className="absolute inset-0 z-20 flex items-center pointer-events-none">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <h2 className="text-lg sm:text-xl font-bold drop-shadow-sm">My Tasks</h2>
+            <p className="text-sm text-white/80 mt-1 drop-shadow-sm max-w-xl">
+              Manage verifications and review scholarship applications
+            </p>
+          </div>
         </div>
       </div>
 
       {/* Stepper */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-5 relative z-10 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10 w-full">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           {steps.map((step, i) => {
             const Icon = step.icon;
@@ -159,8 +173,8 @@ const Dashboard = () => {
                     <span className="font-medium text-[#D1AD6E]">{pendingCount} pending</span> · {applicants.length} total applications
                   </p>
                 </div>
-                <div className="flex items-center gap-2">
-                  <div className="relative flex-1 sm:flex-none">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
+                  <div className="relative flex-1 sm:flex-none sm:min-w-0">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-gray-400" />
                     <input
                       type="text"
@@ -170,19 +184,29 @@ const Dashboard = () => {
                       className="w-full sm:w-56 h-9 pl-9 pr-3 text-xs rounded-lg border border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#18AE59]/20 focus:border-[#18AE59] transition-all"
                     />
                   </div>
-                  <div className="flex items-center gap-1 bg-gray-50 rounded-lg border border-gray-200 p-0.5">
-                    {(['risk', 'name', 'date'] as const).map((s) => (
+                  <div className="flex flex-wrap items-center gap-1 bg-gray-50 rounded-lg border border-gray-200 p-0.5">
+                    {riskFilterOptions.map(({ key, label }) => (
                       <button
-                        key={s}
-                        onClick={() => setSortBy(s)}
+                        key={key}
+                        type="button"
+                        onClick={() => setRiskFilter(key)}
                         className={cn(
-                          'px-2.5 py-1.5 text-[11px] font-medium rounded-md transition-colors capitalize',
-                          sortBy === s
-                            ? 'bg-white text-[#18AE59] shadow-sm'
-                            : 'text-gray-500 hover:text-gray-700'
+                          'px-2 sm:px-2.5 py-1.5 text-[10px] sm:text-[11px] font-medium rounded-md transition-colors flex items-center gap-1.5',
+                          riskFilter === key
+                            ? 'bg-white text-[#0d3320] shadow-sm ring-1 ring-gray-200/80'
+                            : 'text-gray-500 hover:text-gray-700',
+                          key !== 'all' && riskFilter === key && 'ring-0',
+                          key === 'low' && riskFilter === key && '!text-emerald-700 !ring-emerald-200',
+                          key === 'medium' && riskFilter === key && '!text-amber-700 !ring-amber-200',
+                          key === 'high' && riskFilter === key && '!text-orange-700 !ring-orange-200',
+                          key === 'critical' && riskFilter === key && '!text-red-700 !ring-red-200',
+                          key === 'all' && riskFilter === key && '!text-[#18AE59] !ring-[#18AE59]/25'
                         )}
                       >
-                        {s}
+                        {key !== 'all' && (
+                          <span className={cn('w-1.5 h-1.5 rounded-full shrink-0', riskDot[key])} />
+                        )}
+                        {label}
                       </button>
                     ))}
                   </div>
