@@ -100,7 +100,7 @@ const Dashboard = () => {
       {/* Hero Banner */}
       <div className="relative h-36 sm:h-44 overflow-hidden text-white">
         <img src={heroBanner} alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0d3320]/90 to-[#18AE59]/70" />
+        {/* <div className="absolute inset-0 bg-gradient-to-r from-[#0d3320]/90 to-[#18AE59]/70" /> */}
         <div className="absolute inset-0 z-20 flex items-center pointer-events-none">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <h2 className="text-lg sm:text-xl font-bold drop-shadow-sm">My Tasks</h2>

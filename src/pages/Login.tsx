@@ -153,7 +153,7 @@ const Login = () => {
               }}
             />
           ))}
-          <div className="absolute inset-0 bg-gradient-to-l from-[#0d3320]/70 via-[#0d3320]/30 to-transparent" />
+          {/* <div className="absolute inset-0 bg-gradient-to-l from-[#0d3320]/70 via-[#0d3320]/30 to-transparent" /> */}
           <div className="absolute bottom-12 left-12 right-12 z-10">
             <h2 className="text-3xl font-bold text-[#f8f7f4] leading-tight">
               Empowering the next generation<br />through education
