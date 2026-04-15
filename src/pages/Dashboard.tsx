@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Building2, FileCheck, Wallet, Search, ChevronRight, AlertTriangle, CheckCircle2, XCircle, Clock, Bell, LogOut } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import rfsLogo from '@/assets/rfs-logo.png';
+import { HeaderBrand } from '@/components/layout/HeaderBrand';
 import heroBanner from '@/assets/banner.png';
 import { applicants, Applicant } from '@/data/mockApplicants';
 
@@ -66,7 +66,7 @@ const Dashboard = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 sm:h-16">
             <div className="flex items-center gap-3">
-              <img src={rfsLogo} alt="Reliance Foundation" className="h-9 sm:h-10 object-contain" />
+              <HeaderBrand />
               <div className="hidden sm:block h-8 w-px bg-gray-200" />
               <div className="hidden sm:block">
                 <h1 className="text-sm font-semibold text-gray-900 leading-tight">Reliance Foundation</h1>

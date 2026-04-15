@@ -1,12 +1,12 @@
 import { Bell, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import rfsLogo from '@/assets/rfs-logo.png';
+import { HeaderBrand } from '@/components/layout/HeaderBrand';
 
 const DashboardHeader = () => {
   return (
     <header className="h-14 border-b bg-white flex items-center justify-between px-4 sm:px-6 shrink-0">
       <div className="flex items-center gap-3">
-        <img src={rfsLogo} alt="Reliance Foundation" className="h-8 sm:h-9 object-contain" />
+        <HeaderBrand imgClassName="h-8 sm:h-9 max-h-9" />
         <div className="h-6 w-px bg-gray-200 mx-1" />
         <h2 className="text-xs sm:text-sm font-medium text-gray-700">Document Verification</h2>
       </div>

@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { documents as initialDocs, Document, DocStatus } from '@/data/mockDocuments';
-import DashboardHeader from '@/components/dashboard/DashboardHeader';
+import { HeaderBrand } from '@/components/layout/HeaderBrand';
 import DocumentList from '@/components/dashboard/DocumentList';
 import DocumentPreview from '@/components/dashboard/DocumentPreview';
 import AIAnalysisPanel from '@/components/dashboard/AIAnalysisPanel';
@@ -52,15 +52,17 @@ const Index = () => {
     <div className="h-screen flex flex-col overflow-hidden bg-[#f5f5f0]">
       {/* Header with back button */}
       <header className="h-12 sm:h-14 border-b bg-white flex items-center justify-between px-3 sm:px-6 shrink-0">
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          <HeaderBrand imgClassName="h-7 sm:h-8 max-h-8" />
+          <div className="h-5 w-px bg-gray-200 shrink-0" />
           <button
             onClick={() => navigate('/dashboard')}
-            className="flex items-center gap-1.5 text-xs font-medium text-gray-500 hover:text-[#18AE59] transition-colors"
+            className="flex items-center gap-1.5 text-xs font-medium text-gray-500 hover:text-[#18AE59] transition-colors shrink-0"
           >
             <ArrowLeft className="h-4 w-4" />
             <span className="hidden sm:inline">Back to Dashboard</span>
           </button>
-          <div className="h-5 w-px bg-gray-200" />
+          <div className="h-5 w-px bg-gray-200 shrink-0" />
           <div>
             <h1 className="text-xs sm:text-sm font-semibold text-gray-900 leading-tight">
               Document Verification
