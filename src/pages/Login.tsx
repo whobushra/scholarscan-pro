@@ -21,7 +21,8 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [currentBanner, setCurrentBanner] = useState(0);
   const [error, setError] = useState('');
-
+  const [showCaution, setShowCaution] = useState(false);
+  const [showTerms, setShowTerms] = useState(false);
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentBanner((prev) => (prev + 1) % banners.length);
