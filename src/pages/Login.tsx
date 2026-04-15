@@ -195,7 +195,14 @@ const Login = () => {
 
       <p className="pointer-events-none absolute bottom-4 left-4 sm:bottom-5 sm:left-5 lg:bottom-6 lg:left-10 z-20 max-w-[calc(100vw-2rem)] text-left text-[10px] sm:text-[11px] leading-snug text-[#0d3320]/60 lg:text-[#f8f7f4]/75">
         <span className="pointer-events-auto inline-block text-left">
-          All rights reserved. Terms & Conditions. Contact us:{' '}
+          All rights reserved.{' '}
+          <button
+            onClick={() => setShowTerms(true)}
+            className="font-medium text-[#0d3320] hover:text-[#18AE59] lg:text-[#D1AD6E] lg:hover:text-[#e4c989] underline-offset-2 hover:underline transition-colors"
+          >
+            Terms &amp; Conditions
+          </button>
+          . Contact us:{' '}
           <a
             href="mailto:rf.scholarships@reliancefoundation.org"
             className="font-medium text-[#0d3320] hover:text-[#18AE59] lg:text-[#D1AD6E] lg:hover:text-[#e4c989] underline-offset-2 hover:underline transition-colors"
@@ -204,6 +211,58 @@ const Login = () => {
           </a>
         </span>
       </p>
+
+      {/* Caution Notice Dialog */}
+      <Dialog open={showCaution} onOpenChange={setShowCaution}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto p-0 gap-0">
+          <DialogHeader className="p-0">
+            <div className="bg-[#D1AD6E] text-white text-center py-3 px-6 rounded-t-lg">
+              <DialogTitle className="text-base font-semibold tracking-wide">Caution Notice</DialogTitle>
+            </div>
+          </DialogHeader>
+          <div className="px-6 py-5 space-y-4 text-[13px] leading-relaxed text-[#1e3a5f]">
+            <p>It has come to our notice that certain individuals / persons claiming to be representatives of Reliance Foundation are deceiving / misleading the public by fraudulently collecting / soliciting monies in the form of deposits or otherwise, for purported scholarships and other educational benefits by Reliance Foundation.</p>
+            <p>We hereby caution and notify the public that Reliance Foundation and its associated entities have neither appointed nor authorised any person or agency to offer such scholarships, or to issue any letters or to act on our behalf. Any such persons or agencies misleading the public are in no way connected to and do not represent Reliance Foundation or any of its associated entities.</p>
+            <p>Reliance Foundation follows a formal selection process to offer scholarships, the details of which can be found on its official website. Reliance Foundation and its associated entities never solicit or accept monies by way of deposits or otherwise to offer any scholarship or other benefits. Members of the public are advised not to deal with such unscrupulous persons or fall prey to such fraudulent activities.</p>
+            <p>Anyone dealing with fraudulent scholarship calls or communications would be doing so at their own risk. Reliance Foundation and its associated entities will not be responsible or liable in any manner whatsoever for any loss suffered directly or indirectly as a result of dealing with or depositing money with any such persons.</p>
+            <p>We request you to promptly notify the local law enforcement authorities and simultaneously write to us at{' '}
+              <a href="mailto:rf.scholarships@reliancefoundation.org" className="text-[#D1AD6E] font-medium hover:underline">
+                rf.scholarships@reliancefoundation.org
+              </a>{' '}
+              in case you come across any such fraudulent incident or have any information regarding solicitation for purported offer of scholarships or benefits in the name of Reliance Foundation or its associated entities.
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Terms & Conditions Dialog */}
+      <Dialog open={showTerms} onOpenChange={setShowTerms}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto p-0 gap-0">
+          <DialogHeader className="p-0">
+            <div className="bg-[#18AE59] text-white text-center py-3 px-6 rounded-t-lg">
+              <DialogTitle className="text-base font-semibold tracking-wide">Terms &amp; Conditions</DialogTitle>
+            </div>
+          </DialogHeader>
+          <div className="px-6 py-5 space-y-4 text-[13px] leading-relaxed text-[#374151]">
+            <p className="font-semibold text-[#0d3320]">1. Acceptance of Terms</p>
+            <p>By accessing and using the Reliance Foundation Scholarships portal, you agree to be bound by these Terms and Conditions. If you do not agree, please do not use this platform.</p>
+            <p className="font-semibold text-[#0d3320]">2. Eligibility</p>
+            <p>The scholarship programs are open to eligible students as defined by Reliance Foundation. All applicants must provide accurate and truthful information during the application process.</p>
+            <p className="font-semibold text-[#0d3320]">3. Use of Information</p>
+            <p>All personal information collected through this portal will be used solely for scholarship evaluation, verification, and communication purposes. Reliance Foundation is committed to protecting your privacy.</p>
+            <p className="font-semibold text-[#0d3320]">4. Intellectual Property</p>
+            <p>All content, trademarks, and materials on this platform are the property of Reliance Foundation and are protected by applicable intellectual property laws.</p>
+            <p className="font-semibold text-[#0d3320]">5. Disclaimer</p>
+            <p>Reliance Foundation reserves the right to modify, suspend, or discontinue any aspect of the scholarship program at any time without prior notice.</p>
+            <p className="font-semibold text-[#0d3320]">6. Contact</p>
+            <p>For any queries, please contact us at{' '}
+              <a href="mailto:rf.scholarships@reliancefoundation.org" className="text-[#D1AD6E] font-medium hover:underline">
+                rf.scholarships@reliancefoundation.org
+              </a>
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
