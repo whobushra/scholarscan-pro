@@ -106,7 +106,15 @@ const Login = () => {
               </div>
             </div>
 
-            <div className="flex justify-end -mt-0.5">
+            <div className="flex justify-between -mt-0.5">
+              <button
+                type="button"
+                onClick={() => setShowCaution(true)}
+                className="text-[11px] font-medium text-[#b91c1c] hover:text-[#991b1b] transition-colors flex items-center gap-1"
+              >
+                <AlertTriangle className="h-3 w-3" />
+                Caution Notice
+              </button>
               <button
                 type="button"
                 className="text-[11px] font-medium text-[#D1AD6E] hover:text-[#b8943d] transition-colors"
