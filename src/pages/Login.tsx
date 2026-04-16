@@ -161,7 +161,7 @@ const Login = () => {
               key={i}
               src={src}
               alt={`Scholarship banner ${i + 1}`}
-              className="absolute inset-0 w-full h-full object-cover object-[60%_center]"
+              className="absolute inset-0 w-full h-full object-cover object-[75%_center]"
               style={{
                 opacity: currentBanner === i ? 1 : 0,
                 transition: 'opacity 1.2s ease-in-out',
