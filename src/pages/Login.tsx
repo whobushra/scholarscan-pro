@@ -155,13 +155,13 @@ const Login = () => {
         </div>
 
         {/* Right: Banner Carousel */}
-        <div className="hidden lg:flex flex-1 relative overflow-hidden bg-[#0d3320] min-h-0">
+        <div className="hidden lg:flex flex-1 relative overflow-hidden min-h-0 bg-[#e8e4dd]">
           {banners.map((src, i) => (
             <img
               key={i}
               src={src}
               alt={`Scholarship banner ${i + 1}`}
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover object-[60%_center]"
               style={{
                 opacity: currentBanner === i ? 1 : 0,
                 transition: 'opacity 1.2s ease-in-out',
