@@ -44,64 +44,64 @@ const Login = () => {
     <div className="min-h-dvh flex flex-col bg-[#f8f7f4] relative">
       <Link
         to="/"
-        className="absolute top-4 left-4 sm:top-5 sm:left-6 lg:top-6 lg:left-10 z-20"
+        className="absolute top-3 left-3 sm:top-4 sm:left-5 lg:top-5 lg:left-8 z-20"
         aria-label="Reliance Foundation Scholarships home"
       >
-        <img src={rfsLogo} alt="" className="h-9 sm:h-10 lg:h-11 object-contain drop-shadow-sm" />
+        <img src={rfsLogo} alt="" className="h-7 sm:h-8 lg:h-9 object-contain drop-shadow-sm" />
       </Link>
 
       <div className="flex-1 flex flex-row-reverse min-h-0">
         {/* Left: Login Form */}
-        <div className="w-full lg:w-[420px] xl:w-[460px] shrink-0 flex flex-col justify-center px-6 sm:px-10 lg:px-12 pt-14 pb-4 lg:py-6 bg-[#f8f7f4] min-h-0">
-          <div className="mb-5 shrink-0">
-            <h1 className="text-xl font-bold text-[#0d3320] tracking-tight">Welcome back</h1>
-            <p className="text-xs text-[#6b7c8e] mt-0.5 leading-snug">
+        <div className="w-full lg:w-[340px] xl:w-[370px] shrink-0 flex flex-col justify-center px-5 sm:px-7 lg:px-8 pt-12 pb-3 lg:py-5 bg-[#f8f7f4] min-h-0">
+          <div className="mb-4 shrink-0">
+            <h1 className="text-base font-bold text-[#0d3320] tracking-tight">Welcome back</h1>
+            <p className="text-[10px] text-[#6b7c8e] mt-0.5 leading-snug">
               Sign in to your scholarship dashboard
             </p>
           </div>
 
-          <form onSubmit={handleLogin} className="space-y-3 shrink-0">
+          <form onSubmit={handleLogin} className="space-y-2.5 shrink-0">
             {error && (
-              <div className="p-2 rounded-lg bg-[#fee2e2] text-[#b91c1c] text-[11px] font-medium leading-snug">
+              <div className="p-1.5 rounded-md bg-[#fee2e2] text-[#b91c1c] text-[10px] font-medium leading-snug">
                 {error}
               </div>
             )}
 
-            <div className="space-y-1">
-              <label className="text-[10px] font-semibold text-[#0d3320] uppercase tracking-wider">
+            <div className="space-y-0.5">
+              <label className="text-[9px] font-semibold text-[#0d3320] uppercase tracking-wider">
                 Username / Email
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#9ca3af]" />
+                <Mail className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-[#9ca3af]" />
                 <input
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="Username or email"
-                  className="w-full h-9 pl-9 pr-3 text-sm rounded-lg border border-[#d1d5db] bg-white text-[#0d3320] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#18AE59]/30 focus:border-[#18AE59] transition-all"
+                  className="w-full h-7 pl-7 pr-2.5 text-xs rounded-md border border-[#d1d5db] bg-white text-[#0d3320] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#18AE59]/30 focus:border-[#18AE59] transition-all"
                 />
               </div>
             </div>
 
-            <div className="space-y-1">
-              <label className="text-[10px] font-semibold text-[#0d3320] uppercase tracking-wider">
+            <div className="space-y-0.5">
+              <label className="text-[9px] font-semibold text-[#0d3320] uppercase tracking-wider">
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#9ca3af]" />
+                <Lock className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-[#9ca3af]" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
-                  className="w-full h-9 pl-9 pr-10 text-sm rounded-lg border border-[#d1d5db] bg-white text-[#0d3320] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#18AE59]/30 focus:border-[#18AE59] transition-all"
+                  className="w-full h-7 pl-7 pr-8 text-xs rounded-md border border-[#d1d5db] bg-white text-[#0d3320] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#18AE59]/30 focus:border-[#18AE59] transition-all"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#9ca3af] hover:text-[#6b7c8e] transition-colors p-0.5"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-[#9ca3af] hover:text-[#6b7c8e] transition-colors p-0.5"
                 >
-                  {showPassword ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
+                  {showPassword ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
                 </button>
               </div>
             </div>
@@ -110,14 +110,14 @@ const Login = () => {
               <button
                 type="button"
                 onClick={() => setShowCaution(true)}
-                className="text-[11px] font-medium text-[#b91c1c] hover:text-[#991b1b] transition-colors flex items-center gap-1"
+                className="text-[10px] font-medium text-[#b91c1c] hover:text-[#991b1b] transition-colors flex items-center gap-0.5"
               >
-                <AlertTriangle className="h-3 w-3" />
+                <AlertTriangle className="h-2.5 w-2.5" />
                 Caution Notice
               </button>
               <button
                 type="button"
-                className="text-[11px] font-medium text-[#D1AD6E] hover:text-[#b8943d] transition-colors"
+                className="text-[10px] font-medium text-[#D1AD6E] hover:text-[#b8943d] transition-colors"
               >
                 Forgot password?
               </button>
@@ -125,7 +125,7 @@ const Login = () => {
 
             <button
               type="submit"
-              className="w-full h-9 rounded-lg text-sm font-semibold text-white transition-all duration-200 hover:shadow-md active:scale-[0.99]"
+              className="w-full h-7 rounded-md text-xs font-semibold text-white transition-all duration-200 hover:shadow-md active:scale-[0.99]"
               style={{
                 background: 'linear-gradient(135deg, #0d6b3a 0%, #18AE59 100%)',
               }}
@@ -133,21 +133,21 @@ const Login = () => {
               Sign In
             </button>
 
-            <div className="flex items-center gap-2 py-0">
+            <div className="flex items-center gap-1.5 py-0">
               <div className="flex-1 h-px bg-[#d1d5db]" />
-              <span className="text-[9px] text-[#9ca3af] uppercase tracking-wider">or</span>
+              <span className="text-[8px] text-[#9ca3af] uppercase tracking-wider">or</span>
               <div className="flex-1 h-px bg-[#d1d5db]" />
             </div>
 
             <button
               type="button"
-              className="w-full h-9 rounded-lg text-sm font-medium border border-[#d1d5db] text-[#0d3320] bg-white hover:bg-[#f1f0ed] transition-colors"
+              className="w-full h-7 rounded-md text-xs font-medium border border-[#d1d5db] text-[#0d3320] bg-white hover:bg-[#f1f0ed] transition-colors"
             >
               Sign in with OTP
             </button>
           </form>
 
-          <p className="mt-3 text-center text-[11px] text-[#9ca3af] shrink-0">
+          <p className="mt-2.5 text-center text-[10px] text-[#9ca3af] shrink-0">
             <a href="mailto:rf.scholarships@reliancefoundation.org" className="text-[#b8955c] hover:underline">
               Contact support
             </a>
@@ -168,22 +168,21 @@ const Login = () => {
               }}
             />
           ))}
-          {/* <div className="absolute inset-0 bg-gradient-to-l from-[#0d3320]/70 via-[#0d3320]/30 to-transparent" /> */}
-          <div className="absolute bottom-12 left-12 right-12 z-10">
-            <h2 className="text-3xl font-bold text-[#f8f7f4] leading-tight">
+          <div className="absolute bottom-8 left-8 right-8 z-10">
+            <h2 className="text-2xl font-bold text-[#f8f7f4] leading-tight">
               Empowering the next generation<br />through education
             </h2>
-            <p className="mt-3 text-sm text-[#f8f7f4]/80 max-w-md">
+            <p className="mt-2 text-xs text-[#f8f7f4]/80 max-w-sm">
               Reliance Foundation Scholarships — building a brighter future for deserving students across India.
             </p>
-            <div className="flex gap-2 mt-6">
+            <div className="flex gap-1.5 mt-4">
               {banners.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrentBanner(i)}
-                  className="h-1.5 rounded-full transition-all duration-500"
+                  className="h-1 rounded-full transition-all duration-500"
                   style={{
-                    width: currentBanner === i ? 28 : 8,
+                    width: currentBanner === i ? 22 : 6,
                     backgroundColor: currentBanner === i ? '#D1AD6E' : 'rgba(255,255,255,0.4)',
                   }}
                 />
@@ -193,7 +192,7 @@ const Login = () => {
         </div>
       </div>
 
-      <p className="pointer-events-none absolute bottom-4 left-4 sm:bottom-5 sm:left-5 lg:bottom-6 lg:left-10 z-20 max-w-[calc(100vw-2rem)] text-left text-[10px] sm:text-[11px] leading-snug text-[#0d3320]/60 lg:text-[#f8f7f4]/75">
+      <p className="pointer-events-none absolute bottom-3 left-3 sm:bottom-4 sm:left-4 lg:bottom-5 lg:left-8 z-20 max-w-[calc(100vw-2rem)] text-left text-[9px] sm:text-[10px] leading-snug text-[#0d3320]/60 lg:text-[#f8f7f4]/75">
         <span className="pointer-events-auto inline-block text-left">
           All rights reserved.{' '}
           <button
