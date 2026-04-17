@@ -50,7 +50,7 @@ const Login = () => {
         <img src={rfsLogo} alt="" className="h-7 sm:h-8 lg:h-9 object-contain drop-shadow-md" />
       </Link>
 
-      {/* Full-viewport banner — visible behind the transparent form */}
+      {/* Full-viewport banner — behind the form column */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         {banners.map((src, i) => (
           <img
@@ -102,25 +102,25 @@ const Login = () => {
 
       <div className="relative z-10 flex min-h-0 flex-1 flex-row-reverse">
         <div className="flex w-full shrink-0 flex-col justify-center px-4 pb-[max(7rem,env(safe-area-inset-bottom)+5.5rem)] pt-[max(3.5rem,env(safe-area-inset-top)+2.75rem)] sm:mx-auto sm:max-w-md sm:px-6 sm:pb-24 lg:mx-0 lg:max-w-none lg:w-[340px] lg:shrink-0 lg:px-5 lg:pb-10 lg:pt-16 xl:w-[370px] xl:px-6">
-          <div className="rounded-2xl border border-white/20 bg-white/[0.06] px-5 py-6 shadow-[0_8px_40px_rgba(0,0,0,0.12)] ring-1 ring-white/10 backdrop-blur-2xl backdrop-saturate-150 sm:px-6">
+          <div className="rounded-2xl border border-[#e5e2dc] bg-[#f8f7f4] px-5 py-6 shadow-[0_8px_32px_rgba(0,0,0,0.1)] sm:px-6">
             <div className="mb-4 shrink-0">
-              <h1 className="text-base font-bold tracking-tight text-[#f8f7f4] drop-shadow-sm">
+              <h1 className="text-base font-bold tracking-tight text-[#0d3320]">
                 Welcome back
               </h1>
-              <p className="mt-0.5 text-[10px] leading-snug text-[#f8f7f4]/75">
+              <p className="mt-0.5 text-[10px] leading-snug text-[#6b7c8e]">
                 Sign in to your scholarship dashboard
               </p>
             </div>
 
             <form onSubmit={handleLogin} className="shrink-0 space-y-2.5">
               {error && (
-                <div className="rounded-md border border-red-200/60 bg-red-50/90 p-1.5 text-[10px] font-medium leading-snug text-[#b91c1c] backdrop-blur-sm">
+                <div className="rounded-md border border-red-200 bg-red-50 p-1.5 text-[10px] font-medium leading-snug text-[#b91c1c]">
                   {error}
                 </div>
               )}
 
               <div className="space-y-0.5">
-                <label className="text-[9px] font-semibold uppercase tracking-wider text-[#f8f7f4]/90">
+                <label className="text-[9px] font-semibold uppercase tracking-wider text-[#5a6b7c]">
                   Username / Email
                 </label>
                 <div className="relative">
@@ -130,13 +130,13 @@ const Login = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="Username or email"
-                    className="h-7 w-full rounded-md border border-white/40 bg-white/92 pl-7 pr-2.5 text-xs text-[#0d3320] placeholder:text-[#9ca3af] shadow-sm backdrop-blur-sm focus:border-[#18AE59] focus:outline-none focus:ring-2 focus:ring-[#18AE59]/30"
+                    className="h-7 w-full rounded-md border border-[#d1d5db] bg-white pl-7 pr-2.5 text-xs text-[#0d3320] placeholder:text-[#9ca3af] shadow-sm focus:border-[#18AE59] focus:outline-none focus:ring-2 focus:ring-[#18AE59]/30"
                   />
                 </div>
               </div>
 
               <div className="space-y-0.5">
-                <label className="text-[9px] font-semibold uppercase tracking-wider text-[#f8f7f4]/90">
+                <label className="text-[9px] font-semibold uppercase tracking-wider text-[#5a6b7c]">
                   Password
                 </label>
                 <div className="relative">
@@ -146,7 +146,7 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
-                    className="h-7 w-full rounded-md border border-white/40 bg-white/92 pl-7 pr-8 text-xs text-[#0d3320] placeholder:text-[#9ca3af] shadow-sm backdrop-blur-sm focus:border-[#18AE59] focus:outline-none focus:ring-2 focus:ring-[#18AE59]/30"
+                    className="h-7 w-full rounded-md border border-[#d1d5db] bg-white pl-7 pr-8 text-xs text-[#0d3320] placeholder:text-[#9ca3af] shadow-sm focus:border-[#18AE59] focus:outline-none focus:ring-2 focus:ring-[#18AE59]/30"
                   />
                   <button
                     type="button"
@@ -162,14 +162,14 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={() => setShowCaution(true)}
-                  className="flex items-center gap-0.5 text-[10px] font-medium text-[#fecaca] transition-colors hover:text-white"
+                  className="flex items-center gap-0.5 text-[10px] font-medium text-[#b91c1c] transition-colors hover:text-[#991b1b]"
                 >
                   <AlertTriangle className="h-2.5 w-2.5" />
                   Caution Notice
                 </button>
                 <button
                   type="button"
-                  className="text-[10px] font-medium text-[#f0d9a8] transition-colors hover:text-[#fff]"
+                  className="text-[10px] font-medium text-[#18AE59] transition-colors hover:text-[#0d6b3a]"
                 >
                   Forgot password?
                 </button>
@@ -186,21 +186,21 @@ const Login = () => {
               </button>
 
               <div className="flex items-center gap-1.5 py-0">
-                <div className="h-px flex-1 bg-white/25" />
-                <span className="text-[8px] uppercase tracking-wider text-[#f8f7f4]/55">or</span>
-                <div className="h-px flex-1 bg-white/25" />
+                <div className="h-px flex-1 bg-[#d1d5db]" />
+                <span className="text-[8px] uppercase tracking-wider text-[#9ca3af]">or</span>
+                <div className="h-px flex-1 bg-[#d1d5db]" />
               </div>
 
               <button
                 type="button"
-                className="h-7 w-full rounded-md border border-white/35 bg-white/85 text-xs font-medium text-[#0d3320] shadow-sm backdrop-blur-sm transition-colors hover:bg-white"
+                className="h-7 w-full rounded-md border border-[#d1d5db] bg-white text-xs font-medium text-[#0d3320] shadow-sm transition-colors hover:bg-[#f3f4f6]"
               >
                 Sign in with OTP
               </button>
             </form>
 
-            <p className="mt-2.5 shrink-0 text-center text-[10px] text-[#f8f7f4]/65">
-              <a href="mailto:rf.scholarships@reliancefoundation.org" className="text-[#f0d9a8] hover:underline">
+            <p className="mt-2.5 shrink-0 text-center text-[10px] text-[#6b7c8e]">
+              <a href="mailto:rf.scholarships@reliancefoundation.org" className="font-medium text-[#b8943d] hover:text-[#9a7a30] hover:underline">
                 Contact support
               </a>
             </p>

@@ -150,7 +150,7 @@ const VerifyOTP = () => {
 
       <div className="relative z-10 flex min-h-0 flex-1 flex-row-reverse">
         <div className="flex w-full shrink-0 flex-col justify-center px-4 pb-[max(7rem,env(safe-area-inset-bottom)+5.5rem)] pt-[max(3.5rem,env(safe-area-inset-top)+2.75rem)] sm:mx-auto sm:max-w-md sm:px-6 sm:pb-24 lg:mx-0 lg:max-w-none lg:w-[340px] lg:shrink-0 lg:px-5 lg:pb-10 lg:pt-16 xl:w-[370px] xl:px-6">
-          <div className="rounded-2xl border border-white/20 bg-white/[0.06] px-5 py-6 shadow-[0_8px_40px_rgba(0,0,0,0.12)] ring-1 ring-white/10 backdrop-blur-2xl backdrop-saturate-150 sm:px-6">
+          <div className="rounded-2xl border border-[#e5e2dc] bg-[#f8f7f4] px-5 py-6 shadow-[0_8px_32px_rgba(0,0,0,0.1)] sm:px-6">
             <div className="mb-4 shrink-0">
               <div
                 className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl sm:h-12 sm:w-12"
@@ -158,18 +158,18 @@ const VerifyOTP = () => {
               >
                 <ShieldCheck className="h-5 w-5 text-white sm:h-6 sm:w-6" />
               </div>
-              <h1 className="text-base font-bold tracking-tight text-[#f8f7f4] drop-shadow-sm sm:text-lg">
+              <h1 className="text-base font-bold tracking-tight text-[#0d3320] sm:text-lg">
                 Verify OTP
               </h1>
-              <p className="mt-0.5 text-[10px] leading-snug text-[#f8f7f4]/75 sm:text-xs">
+              <p className="mt-0.5 text-[10px] leading-snug text-[#6b7c8e] sm:text-xs">
                 We&apos;ve sent a verification code to{' '}
-                <span className="font-medium text-[#f0d9a8]">{username}</span>
+                <span className="font-medium text-[#0d3320]">{username}</span>
               </p>
             </div>
 
             <form onSubmit={handleVerify} className="shrink-0 space-y-3.5 sm:space-y-4">
               {error && (
-                <div className="rounded-md border border-red-200/60 bg-red-50/90 p-1.5 text-[10px] font-medium leading-snug text-[#b91c1c] backdrop-blur-sm sm:text-xs">
+                <div className="rounded-md border border-red-200 bg-red-50 p-1.5 text-[10px] font-medium leading-snug text-[#b91c1c] sm:text-xs">
                   {error}
                 </div>
               )}
@@ -187,7 +187,7 @@ const VerifyOTP = () => {
                     value={digit}
                     onChange={(e) => handleChange(i, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(i, e)}
-                    className="h-9 w-9 rounded-md border border-white/40 bg-white/92 text-center text-sm font-semibold text-[#0d3320] shadow-sm backdrop-blur-sm focus:border-[#18AE59] focus:outline-none focus:ring-2 focus:ring-[#18AE59]/30 sm:h-10 sm:w-10 sm:text-base"
+                    className="h-9 w-9 rounded-md border border-[#d1d5db] bg-white text-center text-sm font-semibold text-[#0d3320] shadow-sm focus:border-[#18AE59] focus:outline-none focus:ring-2 focus:ring-[#18AE59]/30 sm:h-10 sm:w-10 sm:text-base"
                   />
                 ))}
               </div>
@@ -203,15 +203,15 @@ const VerifyOTP = () => {
 
             <div className="mt-4 text-center">
               {resendTimer > 0 ? (
-                <p className="text-[10px] text-[#f8f7f4]/65 sm:text-xs">
+                <p className="text-[10px] text-[#6b7c8e] sm:text-xs">
                   Resend code in{' '}
-                  <span className="font-semibold text-[#f0d9a8]">{resendTimer}s</span>
+                  <span className="font-semibold text-[#0d3320]">{resendTimer}s</span>
                 </p>
               ) : (
                 <button
                   type="button"
                   onClick={handleResend}
-                  className="text-[10px] font-medium text-[#f0d9a8] transition-colors hover:text-[#e4c989] sm:text-xs"
+                  className="text-[10px] font-medium text-[#18AE59] transition-colors hover:text-[#0d6b3a] sm:text-xs"
                 >
                   Resend OTP
                 </button>
@@ -220,14 +220,14 @@ const VerifyOTP = () => {
 
             <Link
               to="/login"
-              className="mt-4 flex items-center justify-center gap-1.5 text-[10px] text-[#f8f7f4]/70 transition-colors hover:text-[#f8f7f4] sm:text-xs"
+              className="mt-4 flex items-center justify-center gap-1.5 text-[10px] text-[#6b7c8e] transition-colors hover:text-[#0d3320] sm:text-xs"
             >
               <ArrowLeft className="h-3.5 w-3.5 shrink-0" />
               Back to Sign In
             </Link>
 
-            <p className="mt-3 shrink-0 text-center text-[10px] text-[#f8f7f4]/65">
-              <a href="mailto:rf.scholarships@reliancefoundation.org" className="text-[#f0d9a8] hover:underline">
+            <p className="mt-3 shrink-0 text-center text-[10px] text-[#6b7c8e]">
+              <a href="mailto:rf.scholarships@reliancefoundation.org" className="font-medium text-[#b8943d] hover:text-[#9a7a30] hover:underline">
                 Contact support
               </a>
             </p>
