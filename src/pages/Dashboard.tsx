@@ -54,6 +54,113 @@ const riskFilterOptions: { key: RiskFilter; label: string }[] = [
   { key: 'critical', label: 'Critical' },
 ];
 
+const AppSidebar = ({
+  activeStep,
+  setActiveStep,
+  pendingCount,
+}: {
+  activeStep: Step;
+  setActiveStep: (s: Step) => void;
+  pendingCount: number;
+}) => {
+  const { state } = useSidebar();
+  const collapsed = state === 'collapsed';
+
+  return (
+    <Sidebar collapsible="icon" className="border-r border-gray-200">
+      <SidebarHeader className="border-b border-gray-100 bg-white">
+        <div className={cn('flex items-center gap-2 px-2 py-2', collapsed && 'justify-center px-0')}>
+          <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-[#18AE59] to-[#0d3320] flex items-center justify-center text-white shrink-0 shadow-sm">
+            <FileCheck className="h-5 w-5" />
+          </div>
+          {!collapsed && (
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-gray-900 leading-tight truncate">Verifications</p>
+              <p className="text-[10px] text-gray-500 leading-tight truncate">Workflow Steps</p>
+            </div>
+          )}
+        </div>
+      </SidebarHeader>
+      <SidebarContent className="bg-white">
+        <SidebarGroup>
+          {!collapsed && (
+            <SidebarGroupLabel className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+              Workflow
+            </SidebarGroupLabel>
+          )}
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {steps.map((step, i) => {
+                const Icon = step.icon;
+                const isActive = activeStep === step.key;
+                const showBadge = step.key === 'application' && pendingCount > 0;
+                return (
+                  <SidebarMenuItem key={step.key}>
+                    <SidebarMenuButton
+                      onClick={() => setActiveStep(step.key)}
+                      isActive={isActive}
+                      tooltip={step.label}
+                      className={cn(
+                        'h-auto py-2.5 rounded-lg transition-all group',
+                        isActive
+                          ? 'bg-gradient-to-r from-[#18AE59]/10 to-transparent text-[#0d3320] hover:bg-[#18AE59]/15 ring-1 ring-[#18AE59]/20'
+                          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                      )}
+                    >
+                      <div
+                        className={cn(
+                          'h-8 w-8 rounded-lg flex items-center justify-center shrink-0 transition-colors',
+                          isActive
+                            ? 'bg-[#18AE59] text-white shadow-sm shadow-[#18AE59]/30'
+                            : 'bg-gray-100 text-gray-500 group-hover:bg-gray-200'
+                        )}
+                      >
+                        <Icon className="h-4 w-4" />
+                      </div>
+                      {!collapsed && (
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center justify-between gap-2">
+                            <span className={cn('text-[9px] font-bold uppercase tracking-wider', isActive ? 'text-[#18AE59]' : 'text-gray-400')}>
+                              Step {i + 1}
+                            </span>
+                            {showBadge && (
+                              <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#D1AD6E]/15 text-[#a8823f]">
+                                {pendingCount}
+                              </span>
+                            )}
+                          </div>
+                          <p className={cn('text-xs font-semibold leading-tight truncate', isActive ? 'text-gray-900' : 'text-gray-700')}>
+                            {step.label}
+                          </p>
+                        </div>
+                      )}
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+      <SidebarFooter className="border-t border-gray-100 bg-white">
+        {!collapsed ? (
+          <div className="p-2 rounded-lg bg-gradient-to-br from-[#18AE59]/5 to-[#D1AD6E]/5 border border-gray-100">
+            <p className="text-[10px] font-semibold text-gray-700">Need help?</p>
+            <a
+              href="mailto:rf.scholarships@reliancefoundation.org"
+              className="text-[10px] text-[#18AE59] hover:underline break-all"
+            >
+              rf.scholarships@reliancefoundation.org
+            </a>
+          </div>
+        ) : (
+          <div className="h-2" />
+        )}
+      </SidebarFooter>
+    </Sidebar>
+  );
+};
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState<Step>('application');
@@ -76,12 +183,16 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f5f0] flex flex-col">
+    <SidebarProvider defaultOpen>
+      <div className="min-h-screen w-full bg-[#f5f5f0] flex">
+        <AppSidebar activeStep={activeStep} setActiveStep={setActiveStep} pendingCount={pendingCount} />
+        <SidebarInset className="bg-[#f5f5f0] flex flex-col min-w-0">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 sm:h-16">
             <div className="flex items-center gap-3">
+              <SidebarTrigger className="text-gray-600 hover:bg-gray-100" />
               <HeaderBrand />
               <div className="hidden sm:block h-8 w-px bg-gray-200" />
               <div className="hidden sm:block">
