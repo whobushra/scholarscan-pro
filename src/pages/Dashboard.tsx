@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Building2, FileCheck, Wallet, Search, ChevronRight, AlertTriangle, CheckCircle2, XCircle, Clock, Bell, LogOut } from 'lucide-react';
+import { Building2, FileCheck, Wallet, Search, ChevronRight, ChevronLeft, AlertTriangle, CheckCircle2, XCircle, Clock, Bell, LogOut } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { HeaderBrand } from '@/components/layout/HeaderBrand';
 import heroBanner from '@/assets/banner.png';
@@ -43,6 +43,7 @@ const Dashboard = () => {
   const [activeStep, setActiveStep] = useState<Step>('application');
   const [search, setSearch] = useState('');
   const [riskFilter, setRiskFilter] = useState<RiskFilter>('all');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const filtered = applicants
     .filter((a) => {
@@ -97,23 +98,9 @@ const Dashboard = () => {
         </div>
       </header>
 
-      {/* Hero Banner */}
-      <div className="relative h-36 sm:h-44 overflow-hidden text-white">
-        <img src={heroBanner} alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
-        {/* <div className="absolute inset-0 bg-gradient-to-r from-[#0d3320]/90 to-[#18AE59]/70" /> */}
-        <div className="absolute inset-0 z-20 flex items-center pointer-events-none">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <h2 className="text-lg sm:text-xl font-bold drop-shadow-sm">My Tasks</h2>
-            <p className="text-sm text-white/80 mt-1 drop-shadow-sm max-w-xl">
-              Manage verifications and review scholarship applications
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Stepper */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10 w-full">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+      {/* Mobile: horizontal step indicator */}
+      <div className="md:hidden border-b border-gray-200 bg-white sticky top-14 z-20">
+        <div className="flex overflow-x-auto no-scrollbar">
           {steps.map((step, i) => {
             const Icon = step.icon;
             const isActive = activeStep === step.key;
@@ -122,46 +109,93 @@ const Dashboard = () => {
                 key={step.key}
                 onClick={() => setActiveStep(step.key)}
                 className={cn(
-                  'relative flex items-center gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl border transition-all duration-200 text-left',
+                  'flex-1 min-w-max flex items-center justify-center gap-1.5 px-3 py-2.5 text-[11px] font-medium border-b-2 transition-colors',
                   isActive
-                    ? 'bg-white border-[#18AE59] shadow-lg shadow-[#18AE59]/10 ring-1 ring-[#18AE59]/20'
-                    : 'bg-white border-gray-200 hover:border-[#D1AD6E]/50 hover:shadow-md'
+                    ? 'border-[#18AE59] text-[#0d3320] bg-[#18AE59]/[0.04]'
+                    : 'border-transparent text-gray-500 hover:text-gray-700'
                 )}
               >
-                <div className={cn(
-                  'w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shrink-0 transition-colors',
-                  isActive ? 'bg-[#18AE59] text-white' : 'bg-gray-100 text-gray-500'
-                )}>
-                  <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
-                </div>
-                <div className="min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span className={cn(
-                      'text-[10px] font-bold uppercase tracking-wider',
-                      isActive ? 'text-[#18AE59]' : 'text-gray-400'
-                    )}>
-                      Step {i + 1}
-                    </span>
-                    {isActive && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#18AE59] animate-pulse" />
-                    )}
-                  </div>
-                  <p className={cn(
-                    'text-sm font-semibold mt-0.5 truncate',
-                    isActive ? 'text-gray-900' : 'text-gray-600'
-                  )}>
-                    {step.label}
-                  </p>
-                  <p className="text-[11px] text-gray-400 mt-0.5 hidden sm:block">{step.description}</p>
-                </div>
+                <Icon className="h-3.5 w-3.5" />
+                <span className="whitespace-nowrap">{step.label}</span>
               </button>
             );
           })}
         </div>
       </div>
 
-      {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-1 w-full">
+      {/* Body: Sidebar + Content */}
+      <div className="flex flex-1 w-full overflow-hidden">
+        {/* Sidebar (desktop/tablet) */}
+        <aside
+          className={cn(
+            'hidden md:flex flex-col shrink-0 border-r border-gray-200 bg-white transition-[width] duration-200 ease-out',
+            sidebarCollapsed ? 'w-14' : 'w-[220px]'
+          )}
+        >
+          <div className={cn(
+            'flex items-center h-11 px-2 border-b border-gray-100',
+            sidebarCollapsed ? 'justify-center' : 'justify-between px-3'
+          )}>
+            {!sidebarCollapsed && (
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-gray-400">
+                Workflow
+              </span>
+            )}
+            <button
+              onClick={() => setSidebarCollapsed((v) => !v)}
+              className="p-1 rounded hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors"
+              title={sidebarCollapsed ? 'Expand' : 'Collapse'}
+            >
+              {sidebarCollapsed ? <ChevronRight className="h-3.5 w-3.5" /> : <ChevronLeft className="h-3.5 w-3.5" />}
+            </button>
+          </div>
+          <nav className="flex-1 py-2 space-y-0.5">
+            {steps.map((step) => {
+              const Icon = step.icon;
+              const isActive = activeStep === step.key;
+              return (
+                <button
+                  key={step.key}
+                  onClick={() => setActiveStep(step.key)}
+                  title={sidebarCollapsed ? step.label : undefined}
+                  className={cn(
+                    'group relative w-full flex items-center gap-2.5 h-9 text-[13px] font-medium transition-colors',
+                    sidebarCollapsed ? 'justify-center px-0' : 'px-3',
+                    isActive
+                      ? 'text-[#0d3320] bg-[#18AE59]/[0.06]'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  )}
+                >
+                  <span
+                    className={cn(
+                      'absolute left-0 top-1.5 bottom-1.5 w-[2px] rounded-r-full transition-colors',
+                      isActive ? 'bg-[#18AE59]' : 'bg-transparent'
+                    )}
+                  />
+                  <Icon className={cn('h-4 w-4 shrink-0', isActive ? 'text-[#18AE59]' : 'text-gray-400 group-hover:text-gray-600')} />
+                  {!sidebarCollapsed && <span className="truncate">{step.label}</span>}
+                </button>
+              );
+            })}
+          </nav>
+        </aside>
+
+        {/* Main content */}
+        <main className="flex-1 overflow-y-auto">
+          {/* Hero Banner */}
+          <div className="relative h-32 sm:h-36 overflow-hidden text-white">
+            <img src={heroBanner} alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
+            <div className="absolute inset-0 z-20 flex items-center pointer-events-none">
+              <div className="px-4 sm:px-6 lg:px-8 w-full">
+                <h2 className="text-lg sm:text-xl font-bold drop-shadow-sm">My Tasks</h2>
+                <p className="text-xs sm:text-sm text-white/80 mt-1 drop-shadow-sm max-w-xl">
+                  Manage verifications and review scholarship applications
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="px-4 sm:px-6 lg:px-8 py-5 sm:py-6 w-full">
         {activeStep === 'application' ? (
           <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
             {/* Table Header */}
@@ -335,6 +369,8 @@ const Dashboard = () => {
             </p>
           </div>
         )}
+          </div>
+        </main>
       </div>
 
       {/* Footer */}
