@@ -424,7 +424,9 @@ const Dashboard = () => {
           </a>
         </p>
       </footer>
-    </div>
+        </SidebarInset>
+      </div>
+    </SidebarProvider>
   );
 };
 
