@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Building2, FileCheck, Wallet, Search, ChevronRight, AlertTriangle, CheckCircle2, XCircle, Clock, Bell, LogOut } from 'lucide-react';
+import { Building2, FileCheck, Wallet, Search, ChevronRight, ChevronLeft, AlertTriangle, CheckCircle2, XCircle, Clock, Bell, LogOut } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { HeaderBrand } from '@/components/layout/HeaderBrand';
 import heroBanner from '@/assets/banner.png';
@@ -43,6 +43,7 @@ const Dashboard = () => {
   const [activeStep, setActiveStep] = useState<Step>('application');
   const [search, setSearch] = useState('');
   const [riskFilter, setRiskFilter] = useState<RiskFilter>('all');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const filtered = applicants
     .filter((a) => {
