@@ -229,7 +229,7 @@ const Dashboard = () => {
         <img src={heroBanner} alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
         {/* <div className="absolute inset-0 bg-gradient-to-r from-[#0d3320]/90 to-[#18AE59]/70" /> */}
         <div className="absolute inset-0 z-20 flex items-center pointer-events-none">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="px-4 sm:px-6 lg:px-8 w-full">
             <h2 className="text-lg sm:text-xl font-bold drop-shadow-sm">My Tasks</h2>
             <p className="text-sm text-white/80 mt-1 drop-shadow-sm max-w-xl">
               Manage verifications and review scholarship applications
@@ -238,57 +238,8 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Stepper */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10 w-full">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-          {steps.map((step, i) => {
-            const Icon = step.icon;
-            const isActive = activeStep === step.key;
-            return (
-              <button
-                key={step.key}
-                onClick={() => setActiveStep(step.key)}
-                className={cn(
-                  'relative flex items-center gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl border transition-all duration-200 text-left',
-                  isActive
-                    ? 'bg-white border-[#18AE59] shadow-lg shadow-[#18AE59]/10 ring-1 ring-[#18AE59]/20'
-                    : 'bg-white border-gray-200 hover:border-[#D1AD6E]/50 hover:shadow-md'
-                )}
-              >
-                <div className={cn(
-                  'w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shrink-0 transition-colors',
-                  isActive ? 'bg-[#18AE59] text-white' : 'bg-gray-100 text-gray-500'
-                )}>
-                  <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
-                </div>
-                <div className="min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span className={cn(
-                      'text-[10px] font-bold uppercase tracking-wider',
-                      isActive ? 'text-[#18AE59]' : 'text-gray-400'
-                    )}>
-                      Step {i + 1}
-                    </span>
-                    {isActive && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#18AE59] animate-pulse" />
-                    )}
-                  </div>
-                  <p className={cn(
-                    'text-sm font-semibold mt-0.5 truncate',
-                    isActive ? 'text-gray-900' : 'text-gray-600'
-                  )}>
-                    {step.label}
-                  </p>
-                  <p className="text-[11px] text-gray-400 mt-0.5 hidden sm:block">{step.description}</p>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-1 w-full">
+      <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-1 w-full">
         {activeStep === 'application' ? (
           <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
             {/* Table Header */}
