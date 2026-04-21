@@ -5,6 +5,22 @@ import { cn } from '@/lib/utils';
 import { HeaderBrand } from '@/components/layout/HeaderBrand';
 import heroBanner from '@/assets/banner.png';
 import { applicants, Applicant } from '@/data/mockApplicants';
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarHeader,
+  SidebarFooter,
+  SidebarProvider,
+  SidebarTrigger,
+  SidebarInset,
+  useSidebar,
+} from '@/components/ui/sidebar';
 
 type Step = 'bank' | 'application' | 'disbursement';
 
