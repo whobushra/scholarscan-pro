@@ -7,6 +7,7 @@ import Index from "./pages/Index.tsx";
 import Login from "./pages/Login.tsx";
 import VerifyOTP from "./pages/VerifyOTP.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
+import MyApplication from "./pages/MyApplication.tsx";
 import Profile from "./pages/Profile.tsx";
 import ChangePassword from "./pages/ChangePassword.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/login" element={<Login />} />
           <Route path="/verify-otp" element={<VerifyOTP />} />
+          <Route path="/my-application" element={<MyApplication />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/change-password" element={<ChangePassword />} />
