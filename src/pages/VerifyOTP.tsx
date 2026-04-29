@@ -80,7 +80,7 @@ const VerifyOTP = () => {
       setError('Please enter the complete OTP.');
       return;
     }
-    navigate('/my-application');
+    navigate('/dashboard');
   };
 
   const handleResend = () => {
