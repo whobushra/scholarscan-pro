@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, Mail, Lock, AlertTriangle } from 'lucide-react';
+import { Mail, AlertTriangle, ShieldCheck } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -16,9 +16,7 @@ const banners = [banner01, banner02, banner03];
 
 const Login = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+  const [identifier, setIdentifier] = useState('');
   const [currentBanner, setCurrentBanner] = useState(0);
   const [error, setError] = useState('');
   const [showCaution, setShowCaution] = useState(false);
@@ -33,11 +31,12 @@ const Login = () => {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    if (!username.trim() || !password.trim()) {
-      setError('Please enter both username and password.');
+    const value = identifier.trim();
+    if (!value) {
+      setError('Please enter your email or mobile number.');
       return;
     }
-    navigate('/verify-otp', { state: { username } });
+    navigate('/verify-otp', { state: { username: value } });
   };
 
   return (
@@ -112,7 +111,7 @@ const Login = () => {
               </p>
             </div>
 
-            <form onSubmit={handleLogin} className="shrink-0 space-y-2.5">
+            <form onSubmit={handleLogin} className="shrink-0 space-y-3">
               {error && (
                 <div className="rounded-md border border-red-200 bg-red-50 p-1.5 text-[10px] font-medium leading-snug text-[#b91c1c]">
                   {error}
@@ -121,58 +120,18 @@ const Login = () => {
 
               <div className="space-y-0.5">
                 <label className="text-[9px] font-semibold uppercase tracking-wider text-[#5a6b7c]">
-                  Username / Email
+                  Email / Mobile
                 </label>
                 <div className="relative">
                   <Mail className="absolute left-2.5 top-1/2 h-3 w-3 -translate-y-1/2 text-[#6b7c8e]" />
                   <input
                     type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    placeholder="Username or email"
+                    value={identifier}
+                    onChange={(e) => setIdentifier(e.target.value)}
+                    placeholder="Enter email or mobile number"
                     className="h-7 w-full rounded-md border border-[#d1d5db] bg-white pl-7 pr-2.5 text-xs text-[#0d3320] placeholder:text-[#9ca3af] shadow-sm focus:border-[#18AE59] focus:outline-none focus:ring-2 focus:ring-[#18AE59]/30"
                   />
                 </div>
-              </div>
-
-              <div className="space-y-0.5">
-                <label className="text-[9px] font-semibold uppercase tracking-wider text-[#5a6b7c]">
-                  Password
-                </label>
-                <div className="relative">
-                  <Lock className="absolute left-2.5 top-1/2 h-3 w-3 -translate-y-1/2 text-[#6b7c8e]" />
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password"
-                    className="h-7 w-full rounded-md border border-[#d1d5db] bg-white pl-7 pr-8 text-xs text-[#0d3320] placeholder:text-[#9ca3af] shadow-sm focus:border-[#18AE59] focus:outline-none focus:ring-2 focus:ring-[#18AE59]/30"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 p-0.5 text-[#6b7c8e] transition-colors hover:text-[#0d3320]"
-                  >
-                    {showPassword ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
-                  </button>
-                </div>
-              </div>
-
-              <div className="-mt-0.5 flex justify-between">
-                <button
-                  type="button"
-                  onClick={() => setShowCaution(true)}
-                  className="flex items-center gap-0.5 text-[10px] font-medium text-[#b91c1c] transition-colors hover:text-[#991b1b]"
-                >
-                  <AlertTriangle className="h-2.5 w-2.5" />
-                  Caution Notice
-                </button>
-                <button
-                  type="button"
-                  className="text-[10px] font-medium text-[#18AE59] transition-colors hover:text-[#0d6b3a]"
-                >
-                  Forgot password?
-                </button>
               </div>
 
               <button
@@ -193,17 +152,37 @@ const Login = () => {
 
               <button
                 type="button"
-                className="h-7 w-full rounded-md border border-[#d1d5db] bg-white text-xs font-medium text-[#0d3320] shadow-sm transition-colors hover:bg-[#f3f4f6]"
+                className="flex h-8 w-full items-center justify-center gap-1.5 rounded-md border border-[#d1d5db] bg-white text-xs font-medium text-[#0d3320] shadow-sm transition-colors hover:bg-[#f3f4f6]"
               >
-                Sign in with OTP
+                <ShieldCheck className="h-3.5 w-3.5 text-[#1a73e8]" />
+                Continue with DigiLocker
               </button>
             </form>
 
-            <p className="mt-2.5 shrink-0 text-center text-[10px] text-[#6b7c8e]">
-              <a href="mailto:rf.scholarships@reliancefoundation.org" className="font-medium text-[#b8943d] hover:text-[#9a7a30] hover:underline">
+            <p className="mt-3 shrink-0 text-center text-[11px] text-[#6b7c8e]">
+              New applicant?{' '}
+              <Link to="/register" className="font-semibold text-[#18AE59] hover:text-[#0d6b3a] hover:underline">
+                Register to apply
+              </Link>
+            </p>
+
+            <div className="mt-3 flex items-center justify-center gap-3 border-t border-[#e5e2dc] pt-2.5 text-[10px]">
+              <button
+                type="button"
+                onClick={() => setShowCaution(true)}
+                className="flex items-center gap-0.5 font-medium text-[#b91c1c] transition-colors hover:text-[#991b1b]"
+              >
+                <AlertTriangle className="h-2.5 w-2.5" />
+                Caution Notice
+              </button>
+              <span className="text-[#d1d5db]">•</span>
+              <a
+                href="mailto:rf.scholarships@reliancefoundation.org"
+                className="font-medium text-[#b8943d] hover:text-[#9a7a30] hover:underline"
+              >
                 Contact support
               </a>
-            </p>
+            </div>
           </div>
         </div>
         <div className="min-h-0 flex-1 min-w-0" aria-hidden="true" />
