@@ -56,7 +56,7 @@ const Login = () => {
             key={i}
             src={src}
             alt=""
-            className="absolute inset-0 h-full w-full scale-x-[-1] object-cover object-[center_top] sm:object-[72%_center] lg:object-[75%_center]"
+            className="absolute inset-0 h-full w-full object-cover object-[center_top] sm:object-[28%_center] lg:object-[25%_center]"
             style={{
               opacity: currentBanner === i ? 1 : 0,
               transition: 'opacity 1.2s ease-in-out',
@@ -65,7 +65,7 @@ const Login = () => {
         ))}
         <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/20 to-black/30 sm:from-black/35 sm:via-black/15 sm:to-black/25 pointer-events-none" />
         {/* Bottom-left: headline + carousel — single aligned column */}
-        <div className="absolute inset-x-0 bottom-0 z-[1] flex justify-start pointer-events-none pb-[max(5rem,env(safe-area-inset-bottom)+4.25rem)] sm:pb-[max(5.5rem,env(safe-area-inset-bottom)+4.5rem)] lg:pb-[max(3.25rem,env(safe-area-inset-bottom)+2.25rem)]">
+        <div className="absolute inset-x-0 bottom-0 z-[1] flex justify-end pointer-events-none pb-[max(5rem,env(safe-area-inset-bottom)+4.25rem)] sm:pb-[max(5.5rem,env(safe-area-inset-bottom)+4.5rem)] lg:pb-[max(3.25rem,env(safe-area-inset-bottom)+2.25rem)]">
           <div className="w-full max-w-[min(100%,24rem)] px-4 pb-0 pt-6 sm:max-w-md sm:px-6 sm:pt-8 lg:max-w-lg lg:px-10 lg:pt-10">
             <div className="flex flex-col items-start gap-3 sm:gap-3.5 text-left">
               <div className="space-y-1.5 sm:space-y-2">
@@ -99,7 +99,7 @@ const Login = () => {
         </div>
       </div>
 
-      <div className="relative z-10 flex min-h-0 flex-1 flex-row-reverse">
+      <div className="relative z-10 flex min-h-0 flex-1 flex-row">
         <div className="flex w-full shrink-0 flex-col justify-center px-4 pb-[max(7rem,env(safe-area-inset-bottom)+5.5rem)] pt-[max(3.5rem,env(safe-area-inset-top)+2.75rem)] sm:mx-auto sm:max-w-md sm:px-6 sm:pb-24 lg:mx-0 lg:max-w-none lg:w-[340px] lg:shrink-0 lg:px-5 lg:pb-10 lg:pt-16 xl:w-[370px] xl:px-6">
           <div className="rounded-2xl border border-[#e5e2dc] bg-[#f8f7f4] px-5 py-6 shadow-[0_8px_32px_rgba(0,0,0,0.1)] sm:px-6">
             <div className="mb-4 shrink-0">
@@ -189,9 +189,9 @@ const Login = () => {
       </div>
 
       <p
-        className="pointer-events-none absolute bottom-[max(0.5rem,env(safe-area-inset-bottom))] left-4 right-4 sm:bottom-4 sm:left-6 sm:right-auto lg:bottom-5 lg:left-10 z-30 max-w-[min(100%,42rem)] text-left text-[9px] sm:text-[10px] leading-snug text-[#f8f7f4]/70"
+        className="pointer-events-none absolute bottom-[max(0.5rem,env(safe-area-inset-bottom))] left-4 right-4 sm:bottom-4 sm:right-6 sm:left-auto lg:bottom-5 lg:right-10 z-30 max-w-[min(100%,42rem)] text-right text-[9px] sm:text-[10px] leading-snug text-[#f8f7f4]/70"
       >
-        <span className="pointer-events-auto inline-block text-left">
+        <span className="pointer-events-auto inline-block text-right">
           All rights reserved.{' '}
           <button
             onClick={() => setShowTerms(true)}
