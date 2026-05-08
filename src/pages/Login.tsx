@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Mail, AlertTriangle, ShieldCheck } from 'lucide-react';
+import { Mail, AlertTriangle, ArrowRight } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -136,26 +136,13 @@ const Login = () => {
 
               <button
                 type="submit"
-                className="h-7 w-full rounded-md text-xs font-semibold text-white transition-all duration-200 hover:shadow-md active:scale-[0.99]"
+                className="group relative mt-1 flex h-9 w-full items-center justify-center gap-1.5 overflow-hidden rounded-lg text-[13px] font-semibold text-white shadow-[0_4px_14px_rgba(13,107,58,0.35)] transition-all duration-200 hover:shadow-[0_6px_20px_rgba(13,107,58,0.45)] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#18AE59]/50 focus-visible:ring-offset-2"
                 style={{
-                  background: 'linear-gradient(135deg, #0d6b3a 0%, #18AE59 100%)',
+                  background: 'linear-gradient(135deg, #0d6b3a 0%, #18AE59 60%, #2dd47a 100%)',
                 }}
               >
-                Sign In
-              </button>
-
-              <div className="flex items-center gap-1.5 py-0">
-                <div className="h-px flex-1 bg-[#d1d5db]" />
-                <span className="text-[8px] uppercase tracking-wider text-[#9ca3af]">or</span>
-                <div className="h-px flex-1 bg-[#d1d5db]" />
-              </div>
-
-              <button
-                type="button"
-                className="flex h-8 w-full items-center justify-center gap-1.5 rounded-md border border-[#d1d5db] bg-white text-xs font-medium text-[#0d3320] shadow-sm transition-colors hover:bg-[#f3f4f6]"
-              >
-                <ShieldCheck className="h-3.5 w-3.5 text-[#1a73e8]" />
-                Continue with DigiLocker
+                <span>Sign In</span>
+                <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
               </button>
             </form>
 
