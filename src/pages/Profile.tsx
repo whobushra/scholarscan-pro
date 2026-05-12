@@ -88,7 +88,7 @@ const Profile = () => {
         {/* Avatar Card */}
         <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5 sm:p-6 flex items-center gap-4 mb-4">
           <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-[#18AE59] to-[#0d3320] flex items-center justify-center text-white text-lg sm:text-xl font-bold shrink-0">
-            {profileData.initials}
+            {profile.initials}
           </div>
           <div className="min-w-0">
             <h3 className="text-base sm:text-lg font-semibold text-gray-900">{profile.name}</h3>
