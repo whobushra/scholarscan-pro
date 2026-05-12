@@ -1,27 +1,48 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Mail, Phone, Building, Briefcase, User, KeyRound, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Mail, Phone, Building, Briefcase, User, KeyRound, ChevronRight, Calendar, Users, Save } from 'lucide-react';
 import { HeaderBrand } from '@/components/layout/HeaderBrand';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { toast } from '@/hooks/use-toast';
 import heroBanner from '@/assets/banner.png';
 
-const profileData = {
+const initialProfile = {
   name: 'Demo AVR1',
   email: 'DemoUser_AVR1@test.com',
   mobile: '7897689768',
   position: 'Manager',
   institution: 'Royal College of Pharmacy',
+  gender: '',
+  dob: '',
   initials: 'DA',
 };
 
-const fields = [
-  { label: 'Name', value: profileData.name, icon: User },
-  { label: 'Email', value: profileData.email, icon: Mail },
-  { label: 'Mobile Number', value: profileData.mobile, icon: Phone },
-  { label: 'Position', value: profileData.position, icon: Briefcase },
-  { label: 'Institution Name', value: profileData.institution, icon: Building },
-];
-
 const Profile = () => {
   const navigate = useNavigate();
+  const [profile, setProfile] = useState(initialProfile);
+  const [saving, setSaving] = useState(false);
+
+  const update = (key: keyof typeof profile, value: string) =>
+    setProfile((p) => ({ ...p, [key]: value }));
+
+  const handleSave = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSaving(true);
+    setTimeout(() => {
+      setSaving(false);
+      toast({ title: 'Profile updated', description: 'Your changes have been saved.' });
+    }, 600);
+  };
+
+  const fields: { label: string; key: keyof typeof profile; icon: any; type?: string; placeholder?: string }[] = [
+    { label: 'Name', key: 'name', icon: User },
+    { label: 'Email', key: 'email', icon: Mail, type: 'email' },
+    { label: 'Mobile Number', key: 'mobile', icon: Phone, type: 'tel' },
+    { label: 'Date of Birth', key: 'dob', icon: Calendar, type: 'date' },
+    { label: 'Position', key: 'position', icon: Briefcase },
+    { label: 'Institution Name', key: 'institution', icon: Building },
+  ];
 
   return (
     <div className="min-h-screen bg-[#f5f5f0] flex flex-col">
@@ -70,14 +91,14 @@ const Profile = () => {
             {profileData.initials}
           </div>
           <div className="min-w-0">
-            <h3 className="text-base sm:text-lg font-semibold text-gray-900">{profileData.name}</h3>
-            <p className="text-xs text-gray-500 mt-0.5">{profileData.email}</p>
-            <p className="text-[11px] text-[#D1AD6E] font-medium mt-0.5">{profileData.position} · {profileData.institution}</p>
+            <h3 className="text-base sm:text-lg font-semibold text-gray-900">{profile.name}</h3>
+            <p className="text-xs text-gray-500 mt-0.5">{profile.email}</p>
+            <p className="text-[11px] text-[#D1AD6E] font-medium mt-0.5">{profile.position} · {profile.institution}</p>
           </div>
         </div>
 
         {/* Profile Details */}
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden mb-4">
+        <form onSubmit={handleSave} className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden mb-4">
           <div className="px-5 sm:px-6 py-4 border-b border-gray-100">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-[#D1AD6E]">Profile Details</h4>
           </div>
@@ -85,19 +106,56 @@ const Profile = () => {
             {fields.map((f) => {
               const Icon = f.icon;
               return (
-                <div key={f.label} className="flex items-center gap-3 px-5 sm:px-6 py-4">
+                <div key={f.label} className="flex items-center gap-3 px-5 sm:px-6 py-3">
                   <div className="w-9 h-9 rounded-lg bg-[#18AE59]/8 flex items-center justify-center shrink-0">
                     <Icon className="h-4 w-4 text-[#18AE59]" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="text-[11px] text-gray-400 font-medium">{f.label}</p>
-                    <p className="text-sm text-gray-900 font-medium truncate">{f.value}</p>
+                    <label className="text-[11px] text-gray-400 font-medium block mb-0.5">{f.label}</label>
+                    <Input
+                      type={f.type || 'text'}
+                      value={profile[f.key]}
+                      onChange={(e) => update(f.key, e.target.value)}
+                      className="h-8 px-2 border-gray-200 text-sm font-medium text-gray-900 focus-visible:ring-1 focus-visible:ring-[#18AE59]"
+                    />
                   </div>
                 </div>
               );
             })}
+
+            {/* Gender */}
+            <div className="flex items-center gap-3 px-5 sm:px-6 py-3">
+              <div className="w-9 h-9 rounded-lg bg-[#18AE59]/8 flex items-center justify-center shrink-0">
+                <Users className="h-4 w-4 text-[#18AE59]" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <label className="text-[11px] text-gray-400 font-medium block mb-0.5">Gender</label>
+                <Select value={profile.gender} onValueChange={(v) => update('gender', v)}>
+                  <SelectTrigger className="h-8 px-2 border-gray-200 text-sm font-medium text-gray-900 focus:ring-1 focus:ring-[#18AE59]">
+                    <SelectValue placeholder="Select gender" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="male">Male</SelectItem>
+                    <SelectItem value="female">Female</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                    <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
           </div>
-        </div>
+
+          <div className="px-5 sm:px-6 py-3 border-t border-gray-100 bg-gray-50/50 flex justify-end">
+            <button
+              type="submit"
+              disabled={saving}
+              className="inline-flex items-center gap-2 bg-[#18AE59] hover:bg-[#149a4d] disabled:opacity-60 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
+            >
+              <Save className="h-4 w-4" />
+              {saving ? 'Saving...' : 'Save Changes'}
+            </button>
+          </div>
+        </form>
 
         {/* Change Password Button */}
         <button
